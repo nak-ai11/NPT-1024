@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zozotown風ファッションサイト</title>
+    <link rel="stylesheet" href="zozo.css">
+
+    <style>
+        /* ボタンを中央に配置して目立たせる */
+        #random-items button {
+            display: block;
+            margin: 20px auto; /* 上下のマージンを追加して中央に配置 */
+            padding: 10px 20px; /* ボタンのパディングを追加してサイズを大きく */
+            font-size: 16px; /* ボタンのフォントサイズを大きくして目立たせる */
+            background-color: #ff6347; /* 鮮やかな背景色 (トマト色) */
+            color: white; /* テキストの色を白に */
+            border: none; /* ボーダーなし */
+            border-radius: 5px; /* ボタンの角を丸く */
+            cursor: pointer; /* ホバー時にカーソルを変更 */
+            transition: background-color 0.3s ease; /* ホバー時の色変化をスムーズに */
+        }
+
+        /* ホバー時のエフェクト */
+        #random-items button:hover {
+            background-color: #ff4500; /* ホバー時に背景色を少し暗く */
+        }
+
+        /* 小さな枠にアイテムを表示するスタイル */
+        #random-items-grid {
+            display: flex;
+            justify-content: center; /* 中央揃え */
+            gap: 10px; /* アイテム間のスペース */
+        }
+
+        .item {
+            width: 300px; /* アイテムの枠の幅 */
+            border: 1px solid #ddd; /* 枠線 */
+            padding: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .item img {
+            width: 200px; /* 画像のサイズを小さくする */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .item p {
+            margin: 5px 0;
+            font-size: 14px; /* テキストのサイズを少し小さく */
+        }
+
+        /* 新着アイテムのスライドスタイル */
+        .slider {
+            position: relative;
+            overflow: hidden; /* 溢れた部分を隠す */
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.3s ease; /* スライドのアニメーション */
+        }
+
+        .slider-container .item {
+            min-width: 300px; /* アイテムの最小幅 */
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーションバー -->
+    <header>
+        <div class="logo">
+            <h1>NPTStore</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#new-arrivals">新着アイテム</a></li>
+                <li><a href="#men">メンズ</a></li>
+                <li><a href="#women">レディース</a></li>
+                <li><a href="#sale">セール</a></li>
+                <li><a href="#ranking">ランキング</a></li>
+                <li><a href="chat.html">チャット</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="アイテムを検索...">
+            <button>検索</button>
+        </div>
+        <div class="search-bar">
+            <button onclick="location.href='register.html'">アカウント登録</button>
+        </div>
+    </header>
+
+    <!-- メインビジュアルセクション -->
+    <section id="hero">
+        <div class="slider">
+            <div class="slide">
+                <img src="./pic/ero.jpg" alt="トレンドファッション">
+                <div class="caption">
+                    <h2>2024年秋の最新コレクション</h2>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="./pic/natu.jpg" alt="セール中の商品">
+                <div class="caption">
+                    <h2>大幅割引セール中！</h2>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="./pic/OIP.jpg" alt="セール中の商品">
+                <div class="caption">
+                    <h2>スポーツ祭</h2>
+                </div>
+            </div>
+            <!-- 矢印ボタン -->
+            <button class="arrow left" id="prev">&#10094;</button>
+            <button class="arrow right" id="next">&#10095;</button>
+        </div>
+    </section>
+    
+    <!-- 新着アイテムセクション -->
+    <section id="new-arrivals">
+        <h2>新着アイテム</h2>
+        <div class="slider">
+            <div class="slider-container">
+                <div class="item">
+                    <img src="./pic/bumeran.jpg" alt="アイテム1">
+                    <p>商品名 1</p>
+                    <p>¥5,000</p>
+                </div>
+                <div class="item">
+                    <img src="./pic/black.jpg" alt="アイテム2">
+                    <p>商品名 2</p>
+                    <p>¥6,800</p>
+                </div>
+                <div class="item">
+                    <img src="./pic/box.jpg" alt="アイテム3">
+                    <p>商品名 3</p>
+                    <p>¥4,500</p>
+                </div>
+                <div class="item">
+                    <img src="./pic/pocha.jpg" alt="アイテム4">
+                    <p>商品名 4</p>
+                    <p>¥7,200</p>
+                </div>
+                <div class="item">
+                    <img src="./pic/000000005756-10-l.jpg" alt="アイテム5">
+                    <p>商品名 5</p>
+                    <p>¥7,200</p>
+                </div>
+                <div class="item">
+                    <img src="./pic/977c2bf3c3d55bb1d4fcdba56037a1f2.jpg" alt="アイテム6">
+                    <p>商品名 6</p>
+                    <p>¥7,200</p>
+                </div>
+                <div class="item">
+                    <img src="./pic/52zak571-1.jpg" alt="アイテム7">
+                    <p>商品名 7</p>
+                    <p>¥7,200</p>
+                </div>
+            </div>
+            <button class="prev" onclick="slide(-1)">❮</button>
+            <button class="next" onclick="slide(1)">❯</button>
+        </div>
+    </section>
+    
+    <section id="random-items">
+        <h2>あなたにおすすめの商品</h2>
+        <button onclick="showRandomItems()">AI選別の商品を表示</button>
+        <div class="random-items-grid" id="random-items-grid"></div>
+    </section>
+
+    <section id="men">
+        <h2>メンズ新着アイテム</h2>
+        <div class="items-grid">
+            <div class="item">
+                <img src="item1.jpg" alt="アイテム1">
+                <p>商品名 1</p>
+                <p>¥5,000</p>
+            </div>
+            <div class="item">
+                <img src="item2.jpg" alt="アイテム2">
+                <p>商品名 2</p>
+                <p>¥6,800</p>
+            </div>
+            <div class="item">
+                <img src="item3.jpg" alt="アイテム3">
+                <p>商品名 3</p>
+                <p>¥4,500</p>
+            </div>
+            <div class="item">
+                <img src="item4.jpg" alt="アイテム4">
+                <p>商品名 4</p>
+                <p>¥7,200</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        const items = [
+            { name: "商品名 1", price: 5000, image: "./pic/bumeran.jpg" },
+            { name: "商品名 2", price: 6800, image: "./pic/black.jpg" },
+            { name: "商品名 3", price: 4500, image: "./pic/box.jpg" },
+            { name: "商品名 4", price: 7200, image: "./pic/pocha.jpg" },
+            { name: "商品名 5", price: 7200, image: "./pic/000000005756-10-l.jpg" },
+            { name: "商品名 6", price: 7200, image: "./pic/977c2bf3c3d55bb1d4fcdba56037a1f2.jpg" },
+            { name: "商品名 7", price: 7200, image: "./pic/52zak571-1.jpg" }
+        ];
+
+
+        function showRandomItems() {
+            // ランダムな2つのアイテムを選ぶ
+            const randomItems = [];
+            while (randomItems.length < 2) {
+                const randomIndex = Math.floor(Math.random() * items.length);
+                if (!randomItems.includes(items[randomIndex])) {
+                    randomItems.push(items[randomIndex]);
+                }
+            }
+
+            // 選ばれたアイテムを表示する
+            const randomItemsGrid = document.getElementById("random-items-grid");
+            randomItemsGrid.innerHTML = ""; // 既存のアイテムをクリア
+            randomItems.forEach(item => {
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("item");
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <p>${item.name}</p>
+                    <p>${item.price}</p>
+                `;
+                randomItemsGrid.appendChild(itemDiv);
+            });
+        }
+
+        let currentIndex = 0;
+
+        function slide(direction) {
+            const container = document.querySelector('.slider-container');
+            const itemCount = items.length;
+
+            currentIndex += direction;
+
+            // ループバック処理
+            if (currentIndex < 0) {
+                currentIndex = itemCount - 1; // 最後のアイテムに戻る
+            } else if (currentIndex >= itemCount) {
+                currentIndex = 0; // 最初のアイテムに戻る
+            }
+
+            // スライド位置を更新
+            container.style.transform = `translateX(${-currentIndex * 300}px)`;
+        }
+    </script>
+    </div>
+
+    <!-- 外部のJavaScriptファイルを読み込む -->
+    <script src="chat.js"></script>
+
+    <img src="pic.jpg" srcset="pic@2x.jpg 2x,pic@3x.jpg" alt="***">
+    <picture>
+        <source media="(min-width: 800px)" srcset="pic-800w.jpg">
+        <source media="(max-width: 799px)" srcset="pic-480w.jpg">
+    </picture>
+</body>
+</html>

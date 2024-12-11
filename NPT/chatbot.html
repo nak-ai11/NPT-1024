@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .chat-container {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0 0 0 10px;
+        }
+        .chat-input button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 0 10px 0;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message.bot {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-box" id="chat-box">
+        <!-- チャットのメッセージがここに表示されます -->
+    </div>
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Type your message here..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    const chatBox = document.getElementById('chat-box');
+
+    function addMessageToChat(content, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', sender);
+        messageElement.textContent = content;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight; // 自動的にスクロール
+    }
+
+    async function sendMessage() {
+        const userInput = document.getElementById('user-input').value;
+        if (userInput.trim() === "") return;
+
+        // ユーザーメッセージをチャットに追加
+        addMessageToChat(userInput, 'user');
+        document.getElementById('user-input').value = '';
+
+        // ボットの応答（仮の応答）
+        addMessageToChat('Thinking...', 'bot');
+
+        try {
+            // Dialogflowへのリクエスト
+            const response = await fetch('https://<your-firebase-function-url>', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+            addMessageToChat(data.reply, 'bot');
+        } catch (error) {
+            addMessageToChat('Error: Could not connect to the server.', 'bot');
+        }
+    }
+    const functions = require("firebase-functions");
+const dialogflow = require("@google-cloud/dialogflow");
+const uuid = require("uuid");
+
+exports.dialogflowGateway = functions.https.onRequest(async (req, res) => {
+const projectId = "<Your-Dialogflow-Project-ID>";
+const sessionId = uuid.v4();
+const sessionClient = new dialogflow.SessionsClient();
+const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
+
+const request = {
+    session: sessionPath,
+    queryInput: {
+        text: {
+        text: req.body.message,
+        languageCode: "en",
+    },
+    },
+};
+
+try {
+    const responses = await sessionClient.detectIntent(request);
+    const result = responses[0].queryResult;
+    res.json({ reply: result.fulfillmentText });
+} catch (error) {
+    res.status(500).send("Error: Could not process the request.");
+}
+});
+
+</script>
+
+</body>
+</html>

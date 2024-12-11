@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPTStore チャット</title>
+    <link rel="stylesheet" href="zozo.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <button onclick="window.location.href='pant.html';">HOMEに戻る</button>
+        </nav>
+    </header>
+
+    <!-- チャットボット -->
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <h2>NPTStore ヘルプ</h2>
+        </div>
+        <div id="chat-messages">
+            <!-- チャットメッセージが表示される部分 -->
+        </div>
+        <div id="chat-input">
+            <input type="text" id="message-input" placeholder="メッセージを入力...">
+            <button id="send-message">送信</button>
+        </div>
+    </div>
+
+    <!-- 外部のJavaScriptファイルを読み込む -->
+    <script src="chat.js"></script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPTStore チャット</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div class="room">
+        <ul>
+            <li class="chat you">   <!- 相手のメッセージにはclass「you」をつける。 ->
+            <p class="mes">相手のメッセージ</p>
+            <div class="status">17:00</div>
+            </li>
+            <li class="chat me">    <!- 相手のメッセージにはclass「me」をつける。 ->
+            <p class="mes">自分のメッセージ自分のメッセージ自分のメッセージ自分のメッセージ自分のメッセージ自分のメッセージ</p>
+            <div class="status">既読<br>17:05</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html> -->

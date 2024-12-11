@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スポーツ向けファッションサイト</title>
+    <link rel="stylesheet" href="page1.css">
+</head>
+<body>
+    <!-- ナビゲーションバー -->
+    <header>
+        <div class="logo">
+            <h1>NPTStore</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#new-arrivals">新着アイテム</a></li>
+                <li><a href="#men">メンズ</a></li>
+                <li><a href="#sale">セール</a></li>
+                <li><a href="#ranking">ランキング</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="アイテムを検索...">
+            <button>検索</button>
+        </div>
+        <div class="search-bar">
+            <button onclick="location.href='register.html'">アカウント登録</button>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="slider">
+            <div class="slide">
+                <img src="./pic/black.jpg" alt="スポーツ向けメンズ下着">
+                <div class="caption">
+                    <h2>動きを制限しない快適なフィット感</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        </div>
+    </section>
+        <!-- 新着アイテムセクション -->
+        <section id="new-arrivals">
+            <h2>新着アイテム</h2>
+            <div class="slider">
+                <div class="slider-container">
+                    <div class="item">
+                        <img src="./pic/bumeran.jpg" alt="アイテム1">
+                        <p>商品名 1</p>
+                        <p>¥5,000</p>
+                    </div>
+                    <div class="item">
+                        <img src="./pic/black.jpg" alt="アイテム2">
+                        <p>商品名 2</p>
+                        <p>¥6,800</p>
+                    </div>
+                    <div class="item">
+                        <img src="./pic/box.jpg" alt="アイテム3">
+                        <p>商品名 3</p>
+                        <p>¥4,500</p>
+                    </div>
+                    <div class="item">
+                        <img src="./pic/pocha.jpg" alt="アイテム4">
+                        <p>商品名 4</p>
+                        <p>¥7,200</p>
+                    </div>
+                    <div class="item">
+                        <img src="./pic/000000005756-10-l.jpg" alt="アイテム5">
+                        <p>商品名 5</p>
+                        <p>¥7,200</p>
+                    </div>
+                    <div class="item">
+                        <img src="./pic/977c2bf3c3d55bb1d4fcdba56037a1f2.jpg" alt="アイテム6">
+                        <p>商品名 6</p>
+                        <p>¥7,200</p>
+                    </div>
+                    <div class="item">
+                        <img src="./pic/52zak571-1.jpg" alt="アイテム7">
+                        <p>商品名 7</p>
+                        <p>¥7,200</p>
+                    </div>
+                </div>
+                <button class="prev" onclick="slide(-1)">❮</button>
+                <button class="next" onclick="slide(1)">❯</button>
+            </div>
+        </section>
+        
+        <section id="random-items">
+            <h2>あなたにおすすめの商品</h2>
+            <button onclick="showRandomItems()">AI選別の商品を表示</button>
+            <div class="random-items-grid" id="random-items-grid"></div>
+        </section>
+    
+        <section id="men">
+            <h2>メンズ新着アイテム</h2>
+            <div class="items-grid">
+                <div class="item">
+                    <img src="item1.jpg" alt="アイテム1">
+                    <p>商品名 1</p>
+                    <p>¥5,000</p>
+                </div>
+                <div class="item">
+                    <img src="item2.jpg" alt="アイテム2">
+                    <p>商品名 2</p>
+                    <p>¥6,800</p>
+                </div>
+                <div class="item">
+                    <img src="item3.jpg" alt="アイテム3">
+                    <p>商品名 3</p>
+                    <p>¥4,500</p>
+                </div>
+                <div class="item">
+                    <img src="item4.jpg" alt="アイテム4">
+                    <p>商品名 4</p>
+                    <p>¥7,200</p>
+                </div>
+            </div>
+        </section>
+    
+        <script src="script.js"></script>
+        <script>
+            const items = [
+                { name: "商品名 1", price: 5000, image: "./pic/bumeran.jpg" },
+                { name: "商品名 2", price: 6800, image: "./pic/black.jpg" },
+                { name: "商品名 3", price: 4500, image: "./pic/box.jpg" },
+                { name: "商品名 4", price: 7200, image: "./pic/pocha.jpg" },
+                { name: "商品名 5", price: 7200, image: "./pic/000000005756-10-l.jpg" },
+                { name: "商品名 6", price: 7200, image: "./pic/977c2bf3c3d55bb1d4fcdba56037a1f2.jpg" },
+                { name: "商品名 7", price: 7200, image: "./pic/52zak571-1.jpg" }
+            ];
+    
+    
+            function showRandomItems() {
+                // ランダムな2つのアイテムを選ぶ
+                const randomItems = [];
+                while (randomItems.length < 2) {
+                    const randomIndex = Math.floor(Math.random() * items.length);
+                    if (!randomItems.includes(items[randomIndex])) {
+                        randomItems.push(items[randomIndex]);
+                    }
+                }
+    
+                // 選ばれたアイテムを表示する
+                const randomItemsGrid = document.getElementById("random-items-grid");
+                randomItemsGrid.innerHTML = ""; // 既存のアイテムをクリア
+                randomItems.forEach(item => {
+                    const itemDiv = document.createElement("div");
+                    itemDiv.classList.add("item");
+                    itemDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <p>${item.name}</p>
+                        <p>${item.price}</p>
+                    `;
+                    randomItemsGrid.appendChild(itemDiv);
+                });
+            }
+    
+            let currentIndex = 0;
+    
+            function slide(direction) {
+                const container = document.querySelector('.slider-container');
+                const itemCount = items.length;
+    
+                currentIndex += direction;
+    
+                // ループバック処理
+                if (currentIndex < 0) {
+                    currentIndex = itemCount - 1; // 最後のアイテムに戻る
+                } else if (currentIndex >= itemCount) {
+                    currentIndex = 0; // 最初のアイテムに戻る
+                }
+    
+                // スライド位置を更新
+                container.style.transform = `translateX(${-currentIndex * 300}px)`;
+            }
+        </script>
+        </div>
+    
+        <!-- 外部のJavaScriptファイルを読み込む -->
+        <script src="chat.js"></script>
+
+    <!-- フッター -->
+    <footer>
+        <p>&copy; 2024 FashionStore - All Rights Reserved.</p>
+        <nav>
+            <ul>
+                <li><a href="#terms">利用規約</a></li>
+                <li><a href="#privacy">プライバシーポリシー</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+</body>
+</html>
